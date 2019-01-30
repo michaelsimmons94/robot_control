@@ -33,8 +33,6 @@ class Sawyer_Head:
         base_joint_name=self._limb.joint_names()[0]
         return self._limb.joint_angle(base_joint_name)
 
-    def clean_shutdown(self):
-        self.set_neutral()
     
     def set_angle(self,angle):
         '''
@@ -77,5 +75,5 @@ if __name__ == '__main__':
     rospy.init_node("head_rotate")
 
     head = Sawyer_Head()
-    rospy.on_shutdown(head.clean_shutdown)
+    # rospy.on_shutdown(head.clean_shutdown)
     rospy.spin()
