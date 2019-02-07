@@ -61,7 +61,7 @@ class Sawyer_Head:
         try:
             base_angle= self.get_base_joint_angle()
             head_angle= self._head.pan()
-            angle=-1*base_angle
+            angle=-1*base_angle+ math.pi/2
             self.set_angle(angle)
             return FaceForwardResponse(True)
         except:
