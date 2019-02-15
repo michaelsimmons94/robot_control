@@ -29,7 +29,7 @@ class Sawyer_Head:
 
         face_forward_service = rospy.Service('head/face_forward', FaceForward, self.face_forward)
         rotate_head_service= rospy.Service('head/pan_to_angle', PanToAngle, self.pan_to_angle)
-        lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
+        #lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
         turn_head=rospy.Subscriber("head/turn",TurnHead, self.turn_head)
         display_face = rospy.Publisher('head/display', Image, latch=True, queue_size=10)
         
@@ -51,9 +51,9 @@ class Sawyer_Head:
         try:
             angle=req.theta
             self._head.set_pan(angle)
-            return FaceAngleResponse(True)
+            return PanToAngleResponse(True)
         except:
-            return FaceAngleResponse(False)
+            return PanToAngleResponse(False)
 
     def face_forward(self, object):
         '''
