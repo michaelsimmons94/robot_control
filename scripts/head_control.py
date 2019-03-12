@@ -29,6 +29,7 @@ class Sawyer_Head:
 
         face_forward_service = rospy.Service('head/face_forward', FaceForward, self.face_forward)
         rotate_head_service= rospy.Service('head/pan_to_angle', PanToAngle, self.pan_to_angle)
+        # arrow_key_control_servie = rospy.Service('head/arrow_key_control', PanToAngle, self.turn_with_arrow_keys)
         #lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
         turn_head=rospy.Subscriber("head/turn",TurnHead, self.turn_head)
         display_face = rospy.Publisher('head/display', Image, latch=True, queue_size=10)
