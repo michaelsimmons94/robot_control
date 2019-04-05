@@ -2,8 +2,6 @@
     <node pkg="robot_control" type="head_control.py" name ="ready_head">
     </node>
     <node pkg="robot_control" type="open_close_gripper_server.py" name ="ready_gripper">
-    </node>  
-    <node pkg="gui_pkg" type="mic.py" name ="mic_server">
-    </node>    
+    </node> 
 
 </launch>
