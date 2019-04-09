@@ -24,6 +24,7 @@ add_service_files(
   FaceForward.srv
   OpenGripper.srv
   PanToAngle.srv
+  MoveArm.srv
 )
 
 generate_messages(
