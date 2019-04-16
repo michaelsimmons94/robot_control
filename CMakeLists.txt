@@ -25,6 +25,7 @@ add_service_files(
   OpenGripper.srv
   PanToAngle.srv
   MoveArm.srv
+  GripperGrasping.srv
 )
 
 generate_messages(
@@ -32,12 +33,11 @@ generate_messages(
   std_msgs
 )
 
-
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robot_control
-  CATKIN_DEPENDS 
-  roscpp 
+  CATKIN_DEPENDS
+  roscpp
   rospy
   std_msgs
   intera_interface
@@ -56,4 +56,3 @@ install(
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   USE_SOURCE_PERMISSIONS
 )
-
