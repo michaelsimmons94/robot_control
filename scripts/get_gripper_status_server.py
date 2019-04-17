@@ -18,9 +18,6 @@ def handle_request(req):
         isOpen = gripper.__dict__['gripper_io'].__dict__['signals'].get('open_B1ZwR2PmT7').get('data')
         isClosed = gripper.__dict__['gripper_io'].__dict__['signals'].get('closed_H1GwChPmT7').get('data')
 
-        print("isOpen:", isOpen)
-        print("isClosed:", isClosed)
-
         is_clicksmart = isinstance(gripper, SimpleClickSmartGripper)
 
         return GripperGraspingResponse(isOpen, isClosed)
@@ -38,15 +35,16 @@ def get_gripper_status_server():
 
     rospy.wait_for_service('open_close_gripper')
 
-    try:
-        oc_gripper = rospy.ServiceProxy('open_close_gripper', OpenGripper)
-        oc_gripper("close")
-        oc_gripper("open")
-    except rospy.ServiceException:
-        print "failed!"
-
     s = rospy.Service('get_gripper_status', GripperGrasping, handle_request)
+
+    # Begin with gripper open
+    try:
+        open_close_gripper = rospy.ServiceProxy('open_close_gripper', OpenGripper)
+        open_close_gripper("open")
+    except rospy.ServiceException:
+        print "Init or Fail"
     print "Ready to give gripper status."
+
     rospy.spin()
 
 if __name__ == "__main__":

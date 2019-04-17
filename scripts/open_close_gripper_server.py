@@ -9,7 +9,7 @@ from intera_interface import (
 )
 #potentially stick handle request in a class like gripper cuff control with an init method.
 def handle_request(req):
-    
+
     try:
         gripper = get_current_gripper_interface()
         is_clicksmart = isinstance(gripper, SimpleClickSmartGripper)
@@ -26,7 +26,7 @@ def handle_request(req):
             try:
                 gripper.set_ee_signal_value('grip', True)
                 print "Gripper is open"
-            except Exception as e: 
+            except Exception as e:
                 print e
             return OpenGripperResponse(True)
         elif(req.command=="close"):
@@ -39,16 +39,16 @@ def handle_request(req):
     except:
         gripper = None
         is_clicksmart = False
-    
+
     else:
         raise rospy.ServiceException("invalid command")
-    
+
 
 def open_close_gripper_server():
-    
+
     rospy.init_node('open_close_gripper_server')
-    
-    
+
+
     s = rospy.Service('open_close_gripper', OpenGripper, handle_request)
     print "Ready to open and close gripper."
     rospy.spin()
