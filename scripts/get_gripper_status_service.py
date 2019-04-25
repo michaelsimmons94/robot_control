@@ -29,15 +29,15 @@ def handle_request(req):
         raise rospy.ServiceException("invalid command")
 
 
-def get_gripper_status_server():
+def get_gripper_status_service():
 
-    rospy.init_node('get_gripper_status_server')
-
-    rospy.wait_for_service('open_close_gripper')
+    rospy.init_node('get_gripper_status_service')
 
     s = rospy.Service('get_gripper_status', GripperGrasping, handle_request)
 
     # Begin with gripper open
+    rospy.wait_for_service('open_close_gripper')
+
     try:
         open_close_gripper = rospy.ServiceProxy('open_close_gripper', OpenGripper)
         open_close_gripper("open")
@@ -48,4 +48,4 @@ def get_gripper_status_server():
     rospy.spin()
 
 if __name__ == "__main__":
-    get_gripper_status_server()
+    get_gripper_status_service()

@@ -1,7 +1,10 @@
 <launch>
-    <node pkg="robot_control" type="head_control.py" name ="ready_head">
+    <node pkg="robot_control" type="head_control.py" name ="head_control">
     </node>
-    <node pkg="robot_control" type="open_close_gripper_server.py" name ="ready_gripper">
-    </node> 
-
+    <node pkg="robot_control" type="open_close_gripper_server.py" name ="open_close_gripper_server">
+    </node>
+    <node pkg="robot_control" type="get_gripper_status_service.py" name ="get_gripper_status_service">
+    </node>
+    <node pkg="robot_control" type="move_gripper_down_service.py" name ="move_gripper_down_service">
+    </node>
 </launch>
