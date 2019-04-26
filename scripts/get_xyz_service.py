@@ -6,11 +6,7 @@ import rospy
 import moveit_commander
 import moveit_msgs.msg
 import geometry_msgs.msg
-from intera_interface import (
-    SimpleClickSmartGripper,
-    get_current_gripper_interface,
-    RobotParams,
-)
+
 
 #potentially stick handle request in a class like gripper cuff control with an init method.
 def handle_request(req):
@@ -28,17 +24,13 @@ def handle_request(req):
 
         return XYZPoseResponse(pos_x, pos_y, pos_z)
     except:
-        print("failed")
+        print("Failed to get xyz position")
 
 
 def get_xyz_service():
-
     rospy.init_node('get_xyz_service')
-
     s = rospy.Service('get_xyz', XYZPose, handle_request)
-
     print "Ready to give xyz position."
-
     rospy.spin()
 
 if __name__ == "__main__":

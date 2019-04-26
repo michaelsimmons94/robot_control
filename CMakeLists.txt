@@ -27,6 +27,7 @@ add_service_files(
   MoveArm.srv
   GripperGrasping.srv
   XYZPose.srv
+  XYZCommand.srv
 )
 
 generate_messages(
