@@ -26,6 +26,7 @@ add_service_files(
   PanToAngle.srv
   MoveArm.srv
   GripperGrasping.srv
+  XYZPose.srv
 )
 
 generate_messages(
