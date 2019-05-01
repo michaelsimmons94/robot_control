@@ -46,10 +46,10 @@ def handle_request(req):
 
 def open_close_gripper_server():
 
-    rospy.init_node('open_close_gripper_server')
+    rospy.init_node('open_close_gripper_service')
 
 
-    s = rospy.Service('open_close_gripper', OpenGripper, handle_request)
+    s = rospy.Service('gripper/actuate', OpenGripper, handle_request)
     print "Ready to open and close gripper."
     rospy.spin()
 

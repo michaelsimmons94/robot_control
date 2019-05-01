@@ -17,13 +17,15 @@ def usage():
     return "%s ['open'|'close']"%sys.argv[0]
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2:
-        action = str(sys.argv[1])
-    else:
-        print usage()
-        sys.exit(1)
-    print "Requesting to %s gripper"%(action)
-    if(open_close_gripper_client(action)):
-        print "gripper is open"
-    else:
-        print "gripper is closed"
+    print("THIS IS NO LONGER SUPPORTED. INSTEAD USE A ROSSERVICE CALL")
+    return
+    # if len(sys.argv) == 2:
+    #     action = str(sys.argv[1])
+    # else:
+    #     print usage()
+    #     sys.exit(1)
+    # print "Requesting to %s gripper"%(action)
+    # if(open_close_gripper_client(action)):
+    #     print "gripper is open"
+    # else:
+    #     print "gripper is closed"

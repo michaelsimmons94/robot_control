@@ -18,7 +18,7 @@ class Sawyer_Body:
         return angle
 
     def __init__(self):
-       
+
         self._done = False
         self._head = intera_interface.Head()
         self._limb=intera_interface.Limb()
@@ -90,16 +90,16 @@ class Sawyer_Body:
             return MoveArmResponse(False)
 
     def move_to_rest(self, req):
-        self._limb = intera_interface.Limb('right')
-        angle = {'right_j6': -2.907107421875, 'right_j5': -0.5761552734375, 'right_j4': -0.3081787109375, 'right_j3': -
-                1.699453125, 'right_j2': -2.884623046875, 'right_j1': -0.679, 'right_j0': 1.234236328125}
-        self._limb.move_to_joint_positions(angle)
-        self.face_forward()
-
-
-
-
-    
+        try:
+            self._limb = intera_interface.Limb('right')
+            angle = {'right_j6': -2.907107421875, 'right_j5': -0.5761552734375, 'right_j4': -0.3081787109375, 'right_j3': -
+                    1.699453125, 'right_j2': -2.884623046875, 'right_j1': -0.679, 'right_j0': 1.234236328125}
+            self._limb.move_to_joint_positions(angle)
+            self.face_forward()
+            return MoveArmResponse(True)
+        except:
+            return MoveArmResponse(False)
+            
 
 if __name__ == '__main__':
     print('ready for positioning commands')
