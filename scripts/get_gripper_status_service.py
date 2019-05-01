@@ -34,7 +34,6 @@ def get_gripper_status_service():
     rospy.init_node('get_gripper_status_service')
 
     s = rospy.Service('gripper/status', GripperGrasping, handle_request)
-
     # Begin with gripper open
     rospy.wait_for_service('gripper/actuate')
 
