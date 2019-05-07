@@ -32,6 +32,7 @@ class Sawyer_Body:
         move_arm_out_of_way_service = rospy.Service('arm/move_away', MoveArm, self.move_arm_out_of_way)
         return_to_last_position= rospy.Service('arm/return_to_position', MoveArm, self.return_to_last_position)
         move_to_rest = rospy.Service('arm/move_to_rest', MoveArm, self.move_to_rest)
+        move_arm_to_rest = rospy.Service('arm/move_arm_to_rest', MoveArm, self.move_arm_to_rest)
         # arrow_key_control_servie = rospy.Service('head/arrow_key_control', PanToAngle, self.turn_with_arrow_keys)
         #lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
         # turn_head=rospy.Subscriber("head/turn",TurnHead, self.turn_head)
@@ -99,7 +100,17 @@ class Sawyer_Body:
             return MoveArmResponse(True)
         except:
             return MoveArmResponse(False)
-            
+        
+    def move_arm_to_rest(self, req):
+        try:
+            self._limb = intera_interface.Limb('right')
+            angle = {'right_j6': -2.907107421875, 'right_j5': -0.5761552734375, 'right_j4': -0.3081787109375, 'right_j3': -
+                     1.699453125, 'right_j2': -2.884623046875, 'right_j1': -0.679, 'right_j0': 1.234236328125}
+            self._limb.move_to_joint_positions(angle)
+            return MoveArmResponse(True)
+        except:
+            return MoveArmResponse(False)
+
 
 if __name__ == '__main__':
     print('ready for positioning commands')
