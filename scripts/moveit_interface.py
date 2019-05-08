@@ -50,12 +50,12 @@ class MoveitInterface(object):
         p.header.frame_id = robot.get_planning_frame()
         p.pose.position.x = 0.
         p.pose.position.y = 1.
-        p.pose.position.z = -0.672
+        p.pose.position.z = -0.68
         scene.add_box("table", p, (2,1.5,1))
 
         p.pose.position.x = 0.
         p.pose.position.y = -.39
-        p.pose.position.z = -0.672
+        p.pose.position.z = -0.68
         scene.add_box("wall", p, (2,.1,4))
 
         self.move_group.go([1.234236328125, -0.679, -2.884623046875, -1.699453125, -0.3081787109375, -0.5761552734375, -2.907107421875], wait=True)
@@ -65,7 +65,7 @@ class MoveitInterface(object):
 
         client.open_close_gripper_client("open")
 
-    def move_arm_to_coord(self, x, y, gripper="move", z=-0.170):
+    def move_arm_to_coord(self, x, y, gripper="move", z=-0.17):
         # move z up
         waypoints = []
         wpose = self.move_group.get_current_pose().pose
@@ -96,6 +96,18 @@ class MoveitInterface(object):
         # move z down
         waypoints = []
         wpose = self.move_group.get_current_pose().pose
+
+        wpose.position.z = -0.15
+        target = copy.deepcopy(wpose)
+
+        self.move_group.set_pose_target(target)
+
+        plan = self.move_group.go(wait=True)
+        # Calling `stop()` ensures that there is no residual movement
+        self.move_group.stop()
+        # It is always good to clear your targets after planning with poses.
+        # Note: there is no equivalent function for clear_joint_value_targets()
+        self.move_group.clear_pose_targets()
 
         wpose.position.z = z
         target = copy.deepcopy(wpose)
