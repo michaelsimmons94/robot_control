@@ -18,7 +18,7 @@ def usage():
 
 if __name__ == "__main__":
     print("THIS IS NO LONGER SUPPORTED. INSTEAD USE A ROSSERVICE CALL")
-    return
+    #return
     # if len(sys.argv) == 2:
     #     action = str(sys.argv[1])
     # else:
