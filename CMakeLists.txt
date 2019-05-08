@@ -28,6 +28,7 @@ add_service_files(
   GripperGrasping.srv
   XYZPose.srv
   XYZCommand.srv
+  RobotMood.srv
 )
 
 generate_messages(

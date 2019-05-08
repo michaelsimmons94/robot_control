@@ -18,7 +18,7 @@ class Sawyer_Head:
         return angle
 
     def __init__(self):
-       
+
         self._done = False
         self._head = intera_interface.Head()
         self._limb=intera_interface.Limb()
@@ -33,12 +33,12 @@ class Sawyer_Head:
         #lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
         turn_head=rospy.Subscriber("head/turn",TurnHead, self.turn_head)
         display_face = rospy.Publisher('head/display', Image, latch=True, queue_size=10)
-        
+
     def get_base_joint_angle(self):
         base_joint_name=self._limb.joint_names()[0]
         return self._limb.joint_angle(base_joint_name)
 
-    
+
     def set_angle(self,angle):
         '''
         Sets head to the desired angle
@@ -68,7 +68,7 @@ class Sawyer_Head:
             return FaceForwardResponse(True)
         except:
             return FaceForwardResponse(False)
-    
+
     def turn_head(self, req):
         try:
             head_angle=self._head.pan()
@@ -86,7 +86,7 @@ class Sawyer_Head:
         pass
 
 
-    
+
 
 if __name__ == '__main__':
     print('ready for head commands')
