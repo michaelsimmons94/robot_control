@@ -9,4 +9,6 @@
     </node>
     <node pkg="robot_control" type="get_robot_is_moving_service.py" name ="robot_is_moving_server">
     </node>
+    <node pkg="RobotFaces" type="face_control.py" name ="Robot_Faces" output="screen">
+    </node>
 </launch>
