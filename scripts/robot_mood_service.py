@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-from robot_control.srv import RobotMood
+from robot_control.srv import *
 import rospy
 import moveit_commander
 import moveit_msgs.msg
@@ -12,15 +12,16 @@ from moveit_interface import MoveitInterface
 #potentially stick handle request in a class like gripper cuff control with an init method.
 def handle_request(req):
 
-    #try:
-    print(req.mood)
-    if req.mood == "happy":
-        interface = MoveitInterface()
-        disco(interface)
+    try:
+        if req.mood == "happy":
+            interface = MoveitInterface()
+            disco(interface)
+        else:
+            raise Exception("invalid mood")
 
-    return RobotMoodResponse(True)
-    # except:
-    #     return RobotMoodResponse(False)
+        return RobotMoodResponse(True)
+    except:
+        return RobotMoodResponse(False)
 
 
 def robot_mood_service():
