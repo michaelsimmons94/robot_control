@@ -29,7 +29,7 @@ def handle_request(req):
 
 def get_xyz_service():
     rospy.init_node('get_xyz_service')
-    s = rospy.Service('get_xyz', XYZPose, handle_request)
+    s = rospy.Service('arm/get_xyz', XYZPose, handle_request)
     print "Ready to give xyz position."
     rospy.spin()
 
