@@ -14,7 +14,7 @@ import time
 
 class MoveitInterface(object):
     def __init__(self):
-        rospy.init_node('simple_node', anonymous=True)
+        #rospy.init_node('simple_node', anonymous=True)
         moveit_commander.roscpp_initialize(sys.argv)
         robot = moveit_commander.RobotCommander()
         scene = moveit_commander.PlanningSceneInterface()
@@ -112,6 +112,28 @@ class MoveitInterface(object):
         if not gripper == "move":
             client.open_close_gripper_client(gripper)
 
+        self.move_group.go([1.234236328125, -0.679, -2.884623046875, -1.699453125, -0.3081787109375, -0.5761552734375, -2.907107421875], wait=True)
+
+        # Calling ``stop()`` ensures that there is no residual movement
+        self.move_group.stop()
+
+    def strict_movement(self,x,y,z):
+        # move to x, y position
+        waypoints = []
+        wpose = self.move_group.get_current_pose().pose
+
+        wpose.position.x = x
+        wpose.position.y = y
+        wpose.position.z = z
+        waypoints.append(copy.deepcopy(wpose))
+
+        (plan, fraction) = self.move_group.compute_cartesian_path(
+                                           waypoints,   # waypoints to follow
+                                           0.01,        # eef_step
+                                           0.0)         # jump_threshold
+        self.move_group.execute(plan)
+
+    def goto_home(self):
         self.move_group.go([1.234236328125, -0.679, -2.884623046875, -1.699453125, -0.3081787109375, -0.5761552734375, -2.907107421875], wait=True)
 
         # Calling ``stop()`` ensures that there is no residual movement
