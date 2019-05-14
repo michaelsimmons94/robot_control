@@ -44,9 +44,9 @@ def handle_request(req):
         raise rospy.ServiceException("invalid command")
 
 
-def open_close_gripper_server():
+def actuate_gripper_server():
 
-    rospy.init_node('open_close_gripper_service')
+    rospy.init_node('actuate_gripper_service')
 
 
     s = rospy.Service('gripper/actuate', OpenGripper, handle_request)
@@ -54,4 +54,4 @@ def open_close_gripper_server():
     rospy.spin()
 
 if __name__ == "__main__":
-    open_close_gripper_server()
+    actuate_gripper_server()

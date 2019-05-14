@@ -38,8 +38,8 @@ def get_gripper_status_service():
     rospy.wait_for_service('gripper/actuate')
 
     try:
-        open_close_gripper = rospy.ServiceProxy('gripper/actuate', OpenGripper)
-        open_close_gripper("open")
+        actuate_gripper = rospy.ServiceProxy('gripper/actuate', OpenGripper)
+        actuate_gripper("open")
     except rospy.ServiceException:
         print "Init or Fail"
     print "Ready to give gripper status."

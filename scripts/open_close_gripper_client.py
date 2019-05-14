@@ -4,10 +4,10 @@ import sys
 import rospy
 from robot_control.srv import *
 
-def open_close_gripper_client(action):
-    rospy.wait_for_service('open_close_gripper')
+def actuate_gripper_client(action):
+    rospy.wait_for_service('actuate_gripper')
     try:
-        open_gripper = rospy.ServiceProxy('open_close_gripper', OpenGripper)
+        open_gripper = rospy.ServiceProxy('actuate_gripper', OpenGripper)
         resp = open_gripper(action)
         return resp.isOpen
     except rospy.ServiceException, e:
@@ -18,6 +18,9 @@ def usage():
 
 if __name__ == "__main__":
     print("THIS IS NO LONGER SUPPORTED. INSTEAD USE A ROSSERVICE CALL")
+<<<<<<< HEAD
+    return
+=======
     #return
     # if len(sys.argv) == 2:
     #     action = str(sys.argv[1])
@@ -29,3 +32,4 @@ if __name__ == "__main__":
     #     print "gripper is open"
     # else:
     #     print "gripper is closed"
+>>>>>>> 4ac23d62512a2c11a88cead256efe76a38b6e815
