@@ -43,11 +43,11 @@ def handle_request(req):
         return XYZCommandResponse(False)
 
 
-def get_xyz_service():
+def goto_xyz_service():
     rospy.init_node('goto_xyz_service')
     s = rospy.Service('goto_xyz', XYZCommand, handle_request)
     print "Ready to move to xyz positions."
     rospy.spin()
 
 if __name__ == "__main__":
-    get_xyz_service()
+    goto_xyz_service()
