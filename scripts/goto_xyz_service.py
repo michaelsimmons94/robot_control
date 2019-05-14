@@ -45,7 +45,7 @@ def handle_request(req):
 
 def goto_xyz_service():
     rospy.init_node('goto_xyz_service')
-    s = rospy.Service('goto_xyz', XYZCommand, handle_request)
+    s = rospy.Service('arm/goto_xyz', XYZCommand, handle_request)
     print "Ready to move to xyz positions."
     rospy.spin()
 

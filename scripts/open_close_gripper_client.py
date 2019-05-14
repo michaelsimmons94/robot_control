@@ -18,4 +18,18 @@ def usage():
 
 if __name__ == "__main__":
     print("THIS IS NO LONGER SUPPORTED. INSTEAD USE A ROSSERVICE CALL")
+<<<<<<< HEAD
     return
+=======
+    #return
+    # if len(sys.argv) == 2:
+    #     action = str(sys.argv[1])
+    # else:
+    #     print usage()
+    #     sys.exit(1)
+    # print "Requesting to %s gripper"%(action)
+    # if(open_close_gripper_client(action)):
+    #     print "gripper is open"
+    # else:
+    #     print "gripper is closed"
+>>>>>>> 4ac23d62512a2c11a88cead256efe76a38b6e815

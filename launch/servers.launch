@@ -1,12 +1,9 @@
 <launch>
-    <node pkg="robot_control" type="get_gripper_status_service.py" name ="get_gripper_status_service">
-    </node>
-    <node pkg="robot_control" type="manipulate_head_service.py" name ="head_control">
-    </node>
-    <node pkg="robot_control" type="move_arm_out_of_way_service.py" name ="move_gripper_out_of_way_service">
-    </node>
-    <node pkg="robot_control" type="actuate_gripper_service.py" name ="actuate_gripper_server">
-    </node>
-    <node pkg="robot_control" type="get_robot_is_moving_service.py" name ="robot_is_moving_server">
-    </node>
+    <include file="$(find robot_faces)/launch/faces.launch"/>
+    <!-- <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"/> -->
+    <node pkg="robot_control" type="get_gripper_status_service.py" name ="get_gripper_status_service"/>
+    <node pkg="robot_control" type="manipulate_head_service.py" name ="head_control"/>
+    <node pkg="robot_control" type="move_arm_out_of_way_service.py" name ="move_gripper_out_of_way_service"/>
+    <node pkg="robot_control" type="actuate_gripper_service.py" name ="open_close_gripper_server"/>
+    <node pkg="robot_control" type="get_robot_is_moving_service.py" name ="robot_is_moving_server"/>
 </launch>
