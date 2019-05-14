@@ -29,6 +29,7 @@ add_service_files(
   XYZPose.srv
   XYZCommand.srv
   RobotMood.srv
+  GameInit.srv
 )
 
 generate_messages(
