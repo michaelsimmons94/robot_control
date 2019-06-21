@@ -29,11 +29,17 @@ add_service_files(
   XYZPose.srv
   XYZCommand.srv
   RobotMood.srv
+  BlockToPixel.srv
+  BlockToPoint.srv
+  PixelToPoint.srv
+  PointToPoint.srv
+  PickAndPlace.srv
 )
 
 generate_messages(
   DEPENDENCIES
   std_msgs
+  geometry_msgs
 )
 
 catkin_package(

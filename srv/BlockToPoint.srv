@@ -1,0 +1,4 @@
+string color
+string shape
+---
+geometry_msgs/Point point
