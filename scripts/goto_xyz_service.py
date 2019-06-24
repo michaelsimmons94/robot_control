@@ -6,48 +6,52 @@ import rospy
 import moveit_commander
 import moveit_msgs.msg
 import geometry_msgs.msg
-
+import moveit_interface
 
 #potentially stick handle request in a class like gripper cuff control with an init method.
 def handle_request(req):
 
     try:
-        moveit_commander.roscpp_initialize(sys.argv)
-        move_group = moveit_commander.MoveGroupCommander('right_arm')
+        # moveit_commander.roscpp_initialize(sys.argv)
+        # move_group = moveit_commander.MoveGroupCommander('right_arm')
         # robot = moveit_commander.RobotCommander()
         # scene = moveit_commander.PlanningSceneInterface()
-        display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
+        # display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', moveit_msgs.msg.DisplayTrajectory, queue_size=20)
 
-        # This value changes the speed of the joint
+        # # This value changes the speed of the joint
         #self.move_group.set_max_velocity_scaling_factor(1)
 
-        # move x and y
-        waypoints = []
-        wpose = move_group.get_current_pose().pose
+        # # move x and y
+        # waypoints = []
+        # wpose = move_group.get_current_pose().pose
 
-        wpose.position.x = req.x
-        wpose.position.y = req.y
-        wpose.position.z = req.z
+        # wpose.position.x = req.x
+        # wpose.position.y = req.y
+        # wpose.position.z = req.z
 
-        waypoints.append(wpose)
+        # waypoints.append(wpose)
 
-        (plan, fraction) = move_group.compute_cartesian_path(
-                                           waypoints,   # waypoints to follow
-                                           0.01,        # eef_step
-                                           0.0)         # jump_threshold
+        # (plan, fraction) = move_group.compute_cartesian_path(
+        #                                    waypoints,   # waypoints to follow
+        #                                    0.01,        # eef_step
+        #                                    0.0)         # jump_threshold
 
-        move_group.execute(plan)
-
+        # move_group.execute(plan)
+        
+        interface = moveit_interface.MoveitInterface()
+        interface.move_arm_to_coord(req.x,req.y, gripper="close", z=-.175)
+        interface.move_arm_to_coord(-.5,.55,gripper = "open",z=-.1)
         return XYZCommandResponse(True)
-    except:
+    except Exception as e:
+        print(str(e))
         return XYZCommandResponse(False)
 
 
-def get_xyz_service():
+def goto_xyz_service():
     rospy.init_node('goto_xyz_service')
-    s = rospy.Service('goto_xyz', XYZCommand, handle_request)
+    s = rospy.Service('arm/goto_xyz', XYZCommand, handle_request)
     print "Ready to move to xyz positions."
     rospy.spin()
 
 if __name__ == "__main__":
-    get_xyz_service()
+    goto_xyz_service()
