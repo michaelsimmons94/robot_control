@@ -1,14 +1,14 @@
 #!/usr/bin/python
-import intera_interface
+from intera_interface import Head, HeadDisplay, Limb, RobotEnable, CHECK_VERSION
 import rospy
 import math
 import os
 import cv2
 import cv_bridge
-from intera_interface import CHECK_VERSION
 from robot_control.srv import *
 from robot_control.msg import *
 from sensor_msgs.msg import Image
+from intera_core_msgs.msg import HeadState
 
 class Sawyer_Head:
 
@@ -20,19 +20,24 @@ class Sawyer_Head:
     def __init__(self):
 
         self._done = False
-        self._head = intera_interface.Head()
-        self._limb=intera_interface.Limb()
-        self._robot_state = intera_interface.RobotEnable(CHECK_VERSION)
+        self._head = Head()
+        self._limb=Limb()
+        self._robot_state = RobotEnable(CHECK_VERSION)
         self._init_state = self._robot_state.state().enabled
         self._robot_state.enable()
-        self._display = intera_interface.HeadDisplay()
+        self._display = HeadDisplay()
 
         face_forward_service = rospy.Service('head/face_forward', FaceForward, self.face_forward)
         rotate_head_service= rospy.Service('head/pan_to_angle', PanToAngle, self.pan_to_angle)
+
         # arrow_key_control_servie = rospy.Service('head/arrow_key_control', PanToAngle, self.turn_with_arrow_keys)
-        #lock_head_service= rospy.Service('head/lock_head', LockHead, self.lock_head)
-        turn_head=rospy.Subscriber("head/turn",TurnHead, self.turn_head)
-        display_face = rospy.Publisher('head/display', Image, latch=True, queue_size=10)
+        # rospy.Subscriber("robot/head/head_state", HeadState, self.straighten)
+
+    # def straighten(self,headState):
+    #     try:
+    #         self._head.set_pan(math.pi/2,speed=1.0,timeout=1.0,active_cancellation=True)
+    #     except OSError, e:
+    #         print(e)
 
     def get_base_joint_angle(self):
         base_joint_name=self._limb.joint_names()[0]
